@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 
 {% block title %}Dashboard - FloreantPOS{% endblock %}
@@ -9,7 +8,7 @@
     
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         <!-- Quick Access Cards -->
-        <a href="{{ url_for('mesas') }}" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow flex items-center gap-4 border-l-4 border-primary">
+        <a href="{{ url_for('tables') }}" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow flex items-center gap-4 border-l-4 border-primary">
             <div class="bg-primary/10 p-4 rounded-full">
                 <i class="fas fa-utensils text-primary text-2xl"></i>
             </div>

@@ -1,0 +1,30 @@
+[
+    {
+        "id": "101",
+        "nome": "P\u00e3o de Alho",
+        "preco": 12.9,
+        "categoria_id": "1",
+        "descricao": "P\u00e3o italiano com manteiga de alho e ervas"
+    },
+    {
+        "id": "201",
+        "nome": "Picanha",
+        "preco": 89.9,
+        "categoria_id": "2",
+        "descricao": "Picanha grelhada com arroz, farofa e vinagrete"
+    },
+    {
+        "id": "301",
+        "nome": "Pudim",
+        "preco": 15.9,
+        "categoria_id": "3",
+        "descricao": "Pudim de leite condensado tradicional"
+    },
+    {
+        "id": "401",
+        "nome": "Refrigerante",
+        "preco": 7.9,
+        "categoria_id": "4",
+        "descricao": "Refrigerantes diversos (lata)"
+    }
+]

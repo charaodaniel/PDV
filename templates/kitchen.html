@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Kitchen Display - FloreantPOS{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">Kitchen Display System</h1>
+        <div>
+            <button class="bg-secondary hover:bg-secondary/90 text-white px-4 py-2 rounded-md shadow-sm" onclick="window.location.reload()">
+                <i class="fas fa-sync-alt mr-2"></i>Refresh Orders
+            </button>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% if orders %}
+            {% for order_id, order in orders.items() %}
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border-t-4 border-accent">
+                <div class="p-4 bg-gray-50 flex justify-between items-center">
+                    <div>
+                        <span class="font-semibold">Order #{{ order_id[:6] }}</span>
+                        <span class="ml-2 px-2 py-0.5 bg-accent/20 text-accent rounded-full text-xs">
+                            {% for table_id, table in tables.items() %}
+                                {% if table_id == order.table_id %}
+                                    {{ table.name }}
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        {{ order.timestamp }}
+                    </div>
+                </div>
+                
+                <div class="p-4">
+                    <h3 class="text-sm font-medium text-gray-500 mb-2">ORDER ITEMS</h3>
+                    <div class="space-y-3">
+                        {% for item in order.items %}
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <div class="flex items-center">
+                                <div class="bg-accent/10 text-accent font-bold rounded-full w-7 h-7 flex items-center justify-center mr-3">
+                                    {{ item.quantity }}
+                                </div>
+                                <div>{{ item.name }}</div>
+                            </div>
+                            <div>
+                                <button class="text-sm bg-secondary/20 text-secondary px-2 py-1 rounded hover:bg-secondary/30">
+                                    Ready
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="p-4 bg-gray-50 border-t flex justify-between">
+                    <button class="text-primary hover:text-primary/80">
+                        <i class="fas fa-print mr-1"></i> Print Ticket
+                    </button>
+                    <button class="bg-secondary hover:bg-secondary/90 text-white px-3 py-1 rounded">
+                        <i class="fas fa-check mr-1"></i> Mark as Ready
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="col-span-full bg-white rounded-lg shadow-md p-10 text-center">
+            <div class="text-6xl text-gray-300 mb-4">
+                <i class="fas fa-utensils"></i>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-700 mb-2">No Active Orders</h2>
+            <p class="text-gray-500">All orders have been completed or no orders have been placed yet.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

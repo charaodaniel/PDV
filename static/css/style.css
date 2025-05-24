@@ -1,0 +1,93 @@
+/* Custom styles for FloreantPOS */
+
+body {
+    font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Animation for status changes */
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+}
+
+/* Animation for adding items */
+.animate-add {
+    animation: add 0.3s ease-out;
+}
+
+@keyframes add {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Table status colors */
+.table-available {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-color: rgb(16, 185, 129);
+}
+
+.table-occupied {
+    background-color: rgba(249, 115, 22, 0.1);
+    border-color: rgb(249, 115, 22);
+}
+
+.table-reserved {
+    background-color: rgba(251, 191, 36, 0.1);
+    border-color: rgb(251, 191, 36);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Print-specific styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .print-only {
+        display: block !important;
+    }
+    
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .receipt {
+        width: 80mm;
+        font-size: 12px;
+        margin: 0 auto;
+    }
+}

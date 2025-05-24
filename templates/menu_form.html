@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Menu Item - FloreantPOS{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">Add Menu Item</h1>
+        <a href="{{ url_for('menu') }}" class="text-primary hover:underline">
+            <i class="fas fa-arrow-left mr-1"></i> Back to Menu
+        </a>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <form method="POST" action="{{ url_for('add_menu_item') }}">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Item Name</label>
+                    <input type="text" id="name" name="name" required
+                           class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                </div>
+                
+                <div>
+                    <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Price</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500">$</span>
+                        </div>
+                        <input type="number" id="price" name="price" step="0.01" min="0" required
+                               class="w-full pl-7 border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <label for="category_id" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <select id="category_id" name="category_id" required
+                        class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <option value="">Select a category</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="mb-6">
+                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea id="description" name="description" rows="3"
+                          class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+            </div>
+            
+            <div class="flex justify-end">
+                <button type="submit" class="bg-primary hover:bg-primary/90 text-white font-medium px-5 py-2 rounded-md shadow-sm">
+                    <i class="fas fa-save mr-1"></i> Save Menu Item
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

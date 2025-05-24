@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FloreantPOS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-primary mb-2">FloreantPOS</h1>
+            <p class="text-gray-600">Sistema de Ponto de Venda para Restaurantes</p>
+        </div>
+        
+        {% for message in get_flashed_messages() %}
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded">
+            <p>{{ message }}</p>
+        </div>
+        {% endfor %}
+        
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="mb-6">
+                <label for="usuario" class="block text-gray-700 text-sm font-bold mb-2">Usuário</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <i class="fas fa-user text-gray-400"></i>
+                    </div>
+                    <input type="text" id="usuario" name="usuario" class="pl-10 w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <label for="senha" class="block text-gray-700 text-sm font-bold mb-2">Senha</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <i class="fas fa-lock text-gray-400"></i>
+                    </div>
+                    <input type="password" id="senha" name="senha" class="pl-10 w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                </div>
+            </div>
+            
+            <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                <i class="fas fa-sign-in-alt mr-2"></i>Entrar
+            </button>
+        </form>
+        
+        <div class="mt-8 text-center text-sm text-gray-600">
+            <p>Credenciais Padrão:</p>
+            <p>Admin: admin / admin</p>
+            <p>Garçom: garcom / garcom</p>
+        </div>
+    </div>
+</body>
+</html>

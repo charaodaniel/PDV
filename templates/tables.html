@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Tables - FloreantPOS{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">Table Management</h1>
+        <div>
+            <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md shadow-sm">
+                <i class="fas fa-plus mr-2"></i>Add New Table
+            </button>
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            {% for table_id, table in tables.items() %}
+            <a href="{{ url_for('order', table_id=table_id) }}" 
+               class="relative border-2 
+                    {% if table.status == 'available' %} border-secondary bg-secondary/10 hover:bg-secondary/20
+                    {% elif table.status == 'occupied' %} border-accent bg-accent/10 hover:bg-accent/20
+                    {% else %} border-warning bg-warning/10 hover:bg-warning/20
+                    {% endif %}
+                    rounded-lg p-4 text-center transition-colors cursor-pointer">
+                <div class="absolute top-2 right-2">
+                    {% if table.status == 'available' %}
+                    <span class="inline-block w-3 h-3 bg-secondary rounded-full"></span>
+                    {% elif table.status == 'occupied' %}
+                    <span class="inline-block w-3 h-3 bg-accent rounded-full"></span>
+                    {% else %}
+                    <span class="inline-block w-3 h-3 bg-warning rounded-full"></span>
+                    {% endif %}
+                </div>
+                <div class="text-2xl font-bold mb-1">{{ table.name }}</div>
+                <div class="text-sm text-gray-600">Seats: {{ table.seats }}</div>
+                <div class="mt-2 text-sm font-medium
+                    {% if table.status == 'available' %} text-secondary
+                    {% elif table.status == 'occupied' %} text-accent
+                    {% else %} text-warning
+                    {% endif %}">
+                    {{ table.status|capitalize }}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Table Status Legend</h2>
+        <div class="flex flex-wrap gap-6">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-4 h-4 bg-secondary rounded-full"></span>
+                <span>Available</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-4 h-4 bg-accent rounded-full"></span>
+                <span>Occupied</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-4 h-4 bg-warning rounded-full"></span>
+                <span>Reserved</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

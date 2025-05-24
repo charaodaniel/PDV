@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+
+{% block title %}Reports - FloreantPOS{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">Sales Reports</h1>
+        <div>
+            <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md shadow-sm">
+                <i class="fas fa-download mr-2"></i>Export Data
+            </button>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="text-sm text-gray-500 mb-1">Total Sales</div>
+            <div class="text-3xl font-bold text-primary">${{ "%.2f"|format(total_sales) }}</div>
+            <div class="text-xs text-gray-500 mt-1">All time</div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="text-sm text-gray-500 mb-1">Today's Sales</div>
+            <div class="text-3xl font-bold text-secondary">${{ "%.2f"|format(total_sales * 0.2) }}</div>
+            <div class="text-xs text-gray-500 mt-1">5 orders today</div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="text-sm text-gray-500 mb-1">Weekly Sales</div>
+            <div class="text-3xl font-bold text-accent">${{ "%.2f"|format(total_sales * 0.6) }}</div>
+            <div class="text-xs text-gray-500 mt-1">15 orders this week</div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="text-sm text-gray-500 mb-1">Average Sale</div>
+            <div class="text-3xl font-bold text-info">${{ "%.2f"|format(total_sales / 25) }}</div>
+            <div class="text-xs text-gray-500 mt-1">Per transaction</div>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-4 bg-primary text-white font-medium">
+                Sales by Day
+            </div>
+            <div class="p-6">
+                <div class="h-80 flex items-end justify-between">
+                    {% for i in range(7) %}
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 bg-primary/{{ 90 - (i * 10) }} rounded-t" style="height: {{ 30 + (i * 20) }}px"></div>
+                        <div class="text-xs mt-2">{{ ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i] }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-4 bg-secondary text-white font-medium">
+                Top Selling Items
+            </div>
+            <div class="p-6">
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-4">
+                            <div class="text-sm font-medium">Burger</div>
+                        </div>
+                        <div class="w-1/2">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-secondary h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs mt-1">
+                                <span>34 sold</span>
+                                <span>$339.66</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-4">
+                            <div class="text-sm font-medium">Cheese Sticks</div>
+                        </div>
+                        <div class="w-1/2">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-secondary h-2.5 rounded-full" style="width: 65%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs mt-1">
+                                <span>26 sold</span>
+                                <span>$155.74</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-4">
+                            <div class="text-sm font-medium">Soda</div>
+                        </div>
+                        <div class="w-1/2">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-secondary h-2.5 rounded-full" style="width: 50%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs mt-1">
+                                <span>20 sold</span>
+                                <span>$49.80</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-4">
+                            <div class="text-sm font-medium">Chocolate Cake</div>
+                        </div>
+                        <div class="w-1/2">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-secondary h-2.5 rounded-full" style="width: 35%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs mt-1">
+                                <span>14 sold</span>
+                                <span>$97.86</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-8">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-4 bg-gray-50 border-b flex justify-between items-center">
+                <h2 class="font-semibold text-gray-800">Recent Orders</h2>
+                <div class="flex space-x-2">
+                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-3 py-1 rounded text-sm">
+                        Today
+                    </button>
+                    <button class="bg-primary hover:bg-primary/90 text-white px-3 py-1 rounded text-sm">
+                        This Week
+                    </button>
+                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-3 py-1 rounded text-sm">
+                        This Month
+                    </button>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Order ID
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Date & Time
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Table
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Server
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Items
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Total
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for i in range(5) %}
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">#{{ 10000 + i }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500">2025-06-{{ 10 + i }} 12:{{ 10 + i * 5 }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Table {{ (i % 4) + 1 }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">{{ ["John", "Sarah", "Mike", "Emma", "Alex"][i] }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">{{ (i % 3) + 2 }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-primary">${{ "%.2f"|format(15.99 + i * 8.5) }}</div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

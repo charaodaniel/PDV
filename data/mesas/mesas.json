@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "nome": "Mesa 1",
+        "lugares": 4,
+        "status": "disponivel"
+    },
+    {
+        "id": "2",
+        "nome": "Mesa 2",
+        "lugares": 2,
+        "status": "disponivel"
+    },
+    {
+        "id": "3",
+        "nome": "Mesa 3",
+        "lugares": 6,
+        "status": "disponivel"
+    },
+    {
+        "id": "4",
+        "nome": "Mesa 4",
+        "lugares": 4,
+        "status": "disponivel"
+    }
+]

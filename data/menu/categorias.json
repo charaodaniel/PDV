@@ -1,0 +1,18 @@
+[
+    {
+        "id": "1",
+        "nome": "Entradas"
+    },
+    {
+        "id": "2",
+        "nome": "Pratos Principais"
+    },
+    {
+        "id": "3",
+        "nome": "Sobremesas"
+    },
+    {
+        "id": "4",
+        "nome": "Bebidas"
+    }
+]

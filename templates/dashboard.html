@@ -1,0 +1,137 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - FloreantPOS{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Dashboard</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <!-- Quick Access Cards -->
+        <a href="{{ url_for('mesas') }}" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow flex items-center gap-4 border-l-4 border-primary">
+            <div class="bg-primary/10 p-4 rounded-full">
+                <i class="fas fa-utensils text-primary text-2xl"></i>
+            </div>
+            <div>
+                <h2 class="text-xl font-semibold text-gray-800">Tables</h2>
+                <p class="text-gray-600">Manage tables and create orders</p>
+            </div>
+        </a>
+        
+        <a href="{{ url_for('menu') }}" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow flex items-center gap-4 border-l-4 border-secondary">
+            <div class="bg-secondary/10 p-4 rounded-full">
+                <i class="fas fa-book-open text-secondary text-2xl"></i>
+            </div>
+            <div>
+                <h2 class="text-xl font-semibold text-gray-800">Menu</h2>
+                <p class="text-gray-600">View and manage menu items</p>
+            </div>
+        </a>
+        
+        <a href="{{ url_for('kitchen') }}" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow flex items-center gap-4 border-l-4 border-accent">
+            <div class="bg-accent/10 p-4 rounded-full">
+                <i class="fas fa-fire text-accent text-2xl"></i>
+            </div>
+            <div>
+                <h2 class="text-xl font-semibold text-gray-800">Kitchen Display</h2>
+                <p class="text-gray-600">View active orders for kitchen</p>
+            </div>
+        </a>
+        
+        {% if session.role == 'admin' %}
+        <a href="{{ url_for('reports') }}" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow flex items-center gap-4 border-l-4 border-info">
+            <div class="bg-info/10 p-4 rounded-full">
+                <i class="fas fa-chart-bar text-info text-2xl"></i>
+            </div>
+            <div>
+                <h2 class="text-xl font-semibold text-gray-800">Reports</h2>
+                <p class="text-gray-600">View sales and performance reports</p>
+            </div>
+        </a>
+        {% endif %}
+    </div>
+    
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Recent Activity -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-800">Recent Activity</h2>
+                <span class="text-sm text-gray-500">Today</span>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="p-3 bg-gray-50 rounded-md flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-success/20 p-2 rounded-full">
+                            <i class="fas fa-check text-success"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium">Order #1234 completed</p>
+                            <p class="text-sm text-gray-500">Table 3 - $45.75</p>
+                        </div>
+                    </div>
+                    <span class="text-xs text-gray-500">10:23 AM</span>
+                </div>
+                
+                <div class="p-3 bg-gray-50 rounded-md flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-primary/20 p-2 rounded-full">
+                            <i class="fas fa-utensils text-primary"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium">New order created</p>
+                            <p class="text-sm text-gray-500">Table 2 - Server: {{ session.name }}</p>
+                        </div>
+                    </div>
+                    <span class="text-xs text-gray-500">9:45 AM</span>
+                </div>
+                
+                <div class="p-3 bg-gray-50 rounded-md flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-accent/20 p-2 rounded-full">
+                            <i class="fas fa-edit text-accent"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium">Menu item updated</p>
+                            <p class="text-sm text-gray-500">Burger - Price: $9.99</p>
+                        </div>
+                    </div>
+                    <span class="text-xs text-gray-500">Yesterday</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Stats -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Quick Stats</h2>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-primary/10 p-4 rounded-lg">
+                    <p class="text-sm text-gray-600">Today's Sales</p>
+                    <p class="text-2xl font-bold text-primary">$254.50</p>
+                    <p class="text-xs text-gray-500 mt-1">5 orders</p>
+                </div>
+                
+                <div class="bg-secondary/10 p-4 rounded-lg">
+                    <p class="text-sm text-gray-600">Active Tables</p>
+                    <p class="text-2xl font-bold text-secondary">2/6</p>
+                    <p class="text-xs text-gray-500 mt-1">33% occupancy</p>
+                </div>
+                
+                <div class="bg-accent/10 p-4 rounded-lg">
+                    <p class="text-sm text-gray-600">Top Selling Item</p>
+                    <p class="text-xl font-bold text-accent">Burger</p>
+                    <p class="text-xs text-gray-500 mt-1">12 units today</p>
+                </div>
+                
+                <div class="bg-info/10 p-4 rounded-lg">
+                    <p class="text-sm text-gray-600">Average Check</p>
+                    <p class="text-2xl font-bold text-info">$42.45</p>
+                    <p class="text-xs text-gray-500 mt-1">↑ 5% from yesterday</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{
+    "1": {
+        "usuario": "admin",
+        "senha": "pbkdf2:sha256:260000$ag4umtRWD70EIvZ8$e1a2560e9addb0d6d5a93f20b4189725f9d3d7381dd431fdedc32c647530c27e",
+        "cargo": "admin",
+        "nome": "Administrador"
+    },
+    "2": {
+        "usuario": "garcom",
+        "senha": "pbkdf2:sha256:260000$4r3G5GwlJ8CMrHvk$16b1b4893bab327b4c7b49f5dc1044c7b9fe325f752856c69097323d12c4307e",
+        "cargo": "garcom",
+        "nome": "Garçom"
+    }
+}
